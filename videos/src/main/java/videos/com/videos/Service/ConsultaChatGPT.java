@@ -21,7 +21,7 @@ public class ConsultaChatGPT {
             }
         }
 
-        OpenAiService service = new OpenAiService("sk-None-1zCQbcC7hiqW4pCPUYIBT3BlbkFJqgsiLHNTdHZazXnOVPfd");
+        OpenAiService service = new OpenAiService("Minhachave");
 
         CompletionRequest requisicao = CompletionRequest.builder()
                 .model("texto-incorporado-3-grande") // Atualizado para um modelo válido
