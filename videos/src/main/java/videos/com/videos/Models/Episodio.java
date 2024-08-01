@@ -1,12 +1,13 @@
 package videos.com.videos.Models;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
-import com.sun.jdi.DoubleValue;
-import jakarta.persistence.*;
-
-import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.OptionalDouble;
 
 @Entity
 @Table(name = "episodios")
