@@ -1,8 +1,9 @@
 #Projeto de Aplicação Java com Spring Data JPA
-@Descrição
+
+#Descrição
 Este projeto é um exemplo de aplicação Java utilizando o Spring Data JPA para gerenciar o acesso aos dados. Inclui mapeamento de entidades para o banco de dados, modelagem de relacionamentos, consultas avançadas, uso de variáveis de ambiente para segurança, e integração com a API do ChatGPT.
 
-@Funcionalidades
+#Funcionalidades
 Repositórios do Spring Data JPA: Simplificação do acesso aos dados com uso de interfaces de repositório.
 Mapeamento de Entidades: Mapeamento de classes Java para tabelas no banco de dados utilizando ORM (Object-Relational Mapping).
 Modelagem de Relacionamentos: Configuração de relacionamentos entre entidades como @OneToOne, @OneToMany, e @ManyToMany.
