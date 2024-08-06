@@ -11,18 +11,8 @@ import videos.com.videos.Repository.SerieRepositorio;
 
 
 @SpringBootApplication
-public class VideosApplication implements CommandLineRunner {
-
-	@Autowired
-	private SerieRepositorio repositorio;  // Injeção de dependência
-
+public class VideosApplication   {
 	public static void main(String[] args) {
 		SpringApplication.run(VideosApplication.class, args);
-	}
-
-	@Override
-	public void run(String... args) throws Exception {
-		Principal principal = new Principal(repositorio);
-		principal.exibeMenu();  // Usando o bean gerenciado pelo Spring
 	}
 }

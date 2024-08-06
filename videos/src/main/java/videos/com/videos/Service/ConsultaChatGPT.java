@@ -21,12 +21,12 @@ public class ConsultaChatGPT {
             }
         }
 
-        OpenAiService service = new OpenAiService("Minhachave");
+        OpenAiService service = new OpenAiService(System.getenv("${OPENAI_APIKEY}"));
 
         CompletionRequest requisicao = CompletionRequest.builder()
-                .model("texto-incorporado-3-grande") // Atualizado para um modelo válido
+                .model("texto-incorporado-3-grande")
                 .prompt("traduza para o português o texto: " + texto)
-                .maxTokens(500) // Ajustado conforme necessidade
+                .maxTokens(500)
                 .temperature(0.7)
                 .build();
 
