@@ -1,67 +1,88 @@
 
 
 ![image](https://github.com/user-attachments/assets/5fd92a66-41f9-4a39-bdab-ff9b0cac6647)
+# Projeto de Série com API GPT
+
+Este projeto é uma aplicação para gerenciar séries de TV, utilizando a API do GPT para busca de informações e o banco de dados PostgreSQL para armazenamento. A aplicação é construída com Spring Framework e utiliza tecnologias como JPA, Hibernate, Spring Web e Spring MVC.
+
+## Tecnologias Utilizadas
+
+- **Spring Framework**: Framework para desenvolvimento de aplicações Java.
+- **Spring Web**: Módulo do Spring para criar aplicações web.
+- **Spring MVC**: Sub-framework para criar aplicações web baseadas em modelo-visão-controlador.
+- **JPA (Java Persistence API)**: Interface padrão para trabalhar com persistência de dados em Java.
+- **Hibernate**: Implementação de JPA para gerenciamento de dados relacionais.
+- **PostgreSQL**: Banco de dados relacional utilizado para armazenar os dados das séries.
+- **API GPT**: API para busca de informações sobre séries.
+
+## Funcionalidades
+
+- Busca de séries por nome.
+- Integração com a API do GPT para busca de informações adicionais sobre séries.
+- Armazenamento e recuperação de dados usando PostgreSQL.
+
+## Instalação e Configuração
+
+### Pré-requisitos
+
+Certifique-se de ter o Java JDK e o PostgreSQL instalados em seu sistema. Além disso, você precisará do Maven para gerenciar as dependências do projeto.
+
+### Passos para Configuração
+
+1. **Clone o Repositório**
+
+   ```bash
+   git clone https://github.com/seuusuario/seurepositorio.git
+   cd seurepositorio
+Configuração do Banco de Dados
+
+Crie um banco de dados PostgreSQL e configure as credenciais no arquivo application.properties localizado em src/main/resources. Atualize as seguintes propriedades:
 
 
+spring.datasource.url=jdbc:postgresql://localhost:5432/seubancodedados
+spring.datasource.username=seuusuario
+spring.datasource.password=suasenha
+Dependências
 
-#Projeto de Aplicação Java com Spring Data JPA#
-
-#Descrição#
-Este projeto é um exemplo de aplicação Java utilizando o Spring Data JPA para gerenciar o acesso aos dados. Inclui mapeamento de entidades para o banco de dados, modelagem de relacionamentos, consultas avançadas, uso de variáveis de ambiente para segurança, e integração com a API do ChatGPT.
-
-#Funcionalidades
-Repositórios do Spring Data JPA: Simplificação do acesso aos dados com uso de interfaces de repositório.
-Mapeamento de Entidades: Mapeamento de classes Java para tabelas no banco de dados utilizando ORM (Object-Relational Mapping).
-Modelagem de Relacionamentos: Configuração de relacionamentos entre entidades como @OneToOne, @OneToMany, e @ManyToMany.
-Consultas Personalizadas: Implementação de consultas simples e complexas utilizando Query Methods e JPQL.
-Segurança com Variáveis de Ambiente: Proteção de informações sensíveis através do uso de variáveis de ambiente.
-Integração com a API do ChatGPT: Adição de inteligência artificial na aplicação através da integração com a API do ChatGPT.
-
-#Tecnologias Utilizadas
-Java 11+
-Spring Boot
-Spring Data JPA
-Hibernate
-MySQL (ou outro banco de dados relacional)
-Docker (opcional, para ambiente de desenvolvimento)
-API do ChatGPT
-
-#Requisitos
-Java 11+
-Maven 3.6+
-MySQL 8.0+ (ou outro banco de dados relacional)
-Docker (opcional)
-Conta na OpenAI (para usar a API do ChatGPT)
-Configuração do Ambiente
-Clone o repositório:
+Execute o Maven para baixar as dependências do projeto:
 
 
-#Copiar código
-git clone https://github.com/seu-usuario/nome-do-repositorio.git
-cd nome-do-repositorio
+mvn clean install
+Executar o Projeto
 
-#Configure o banco de dados:
-
-Crie um banco de dados no MySQL e configure as variáveis de ambiente para conexão (ou use application.properties).
-Configurar variáveis de ambiente:
+Você pode executar a aplicação com o seguinte comando Maven:
 
 
-#Copiar código
-DB_URL=jdbc:mysql://localhost:3306/seu_banco_de_dados
-DB_USERNAME=seu_usuario
-DB_PASSWORD=sua_senha
-CHATGPT_API_KEY=sua_api_key
-#Execute a aplicação:
-
-
-#Copiar código
 mvn spring-boot:run
+Ou, se preferir, compile o projeto e execute o JAR:
 
-#Uso
-Após a configuração, você pode acessar a aplicação em http://localhost:8080. Para utilizar as funcionalidades do ChatGPT, certifique-se de ter configurado corretamente a chave da API.
 
-#Contribuição
-Sinta-se à vontade para contribuir com este projeto! Abra uma issue para discutir melhorias ou envie um pull request.
+mvn package
+java -jar target/seu-arquivo.jar
+Uso
+Depois de iniciar a aplicação, você pode acessar a API em http://localhost:8080. Veja os endpoints disponíveis na documentação da API.
 
-#Licença
-Este projeto está licenciado sob a Licença MIT. Veja o arquivo LICENSE para mais detalhes.
+Contribuição
+Se você deseja contribuir para este projeto, por favor, siga estas etapas:
+
+Fork o repositório.
+Crie uma branch para a sua feature (git checkout -b feature/nome-da-feature).
+Faça commit das suas mudanças (git commit -am 'Adicionando nova feature').
+Faça push para a branch (git push origin feature/nome-da-feature).
+Abra um Pull Request.
+Licença
+Este projeto está licenciado sob a Licença MIT - veja o arquivo LICENSE para mais detalhes.
+
+Contato
+Se você tiver dúvidas ou precisar de ajuda, entre em contato com seuemail@dominio.com.
+
+Nota: Substitua os placeholders, como https://github.com/seuusuario/seurepositorio.git, seubancodedados, seuusuario, suasenha, seu-arquivo.jar, e seuemail@dominio.com pelos valores específicos do seu projeto.
+
+
+
+Esse README fornece uma visão geral do projeto, como configurá-lo e como contribuir. Lembre-se de personalizar as seções com as informações específicas do seu projeto.
+
+
+
+
+
