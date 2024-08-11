@@ -35,112 +35,35 @@ public class SerieService {
     }
     private List<SerieDTO> converteSerie(List<Serie> series) {
         return series.stream()
-                .map(s -> {
-                    // Aqui você pode buscar os episódios recentes para a série s
-                    List<EpisodioDTO> episodiosRecentes = repositorio.obterEpisodiosMaisRecentesPorSerie(s.getId())
-                            .stream()
-                            .map(e -> new EpisodioDTO(e.getTemporada(), e.getNumeroEpisodio(), e.getTitulo()))
-                            .collect(Collectors.toList());
-
-                    return new SerieDTO(
-                            s.getId(),
-                            s.getTitulo(),
-                            s.getTotalTemporadas(),
-                            s.getAvaliacao(),
-                            s.getGenero(),
-                            s.getAtores(),
-                            s.getPoster(),
-                            s.getSinopse(),
-                            episodiosRecentes // Inclua a lista de episódios recentes
-                    );
-                })
+                .map(s -> new SerieDTO(s.getId(), s.getTitulo(), s.getTotalTemporadas(), s.getAvaliacao(), s.getGenero(), s.getAtores(), s.getPoster(), s.getSinopse()))
                 .collect(Collectors.toList());
+      }
+
+
+
+
+      public List<SerieDTO> obterLancamentos() {
+        return converteSerie(repositorio.lancamentosMaisRecentes());
     }
-
-
-
-
-    public List<SerieDTO> obterLancamentosMaisRecentes() {
-        // Obtém as séries mais recentes
-        List<Serie> series = repositorio.lancamentosMaisRecentes();
-
-        // Verifique se a lista de séries está vazia
-        if (series.isEmpty()) {
-            return Collections.emptyList();
-        }
-
-        // Limitar os resultados para os 5 mais recentes
-        List<Serie> top5Series = series.stream()
-                .limit(5)
-                .collect(Collectors.toList());
-
-        return top5Series.stream()
-                .map(serie -> {
-                    // Obtém os episódios mais recentes para cada série
-                    List<EpisodioDTO> episodiosRecentes = repositorio.obterEpisodiosMaisRecentesPorSerie(serie.getId())
-                            .stream()
-                            .map(e -> new EpisodioDTO(
-                                    e.getTemporada(),      // Ajuste conforme o que você tem no Episodio
-                                    e.getNumeroEpisodio(), // Ajuste conforme o que você tem no Episodio
-                                    e.getTitulo()          // Ajuste conforme o que você tem no Episodio
-                            ))
-                            .collect(Collectors.toList());
-
-                    // Criação do SerieDTO com todos os parâmetros necessários, incluindo a lista de EpisodioDTO
-                    return new SerieDTO(
-                            serie.getId(),
-                            serie.getTitulo(),
-                            serie.getTotalTemporadas(),
-                            serie.getAvaliacao(),
-                            serie.getGenero(),
-                            serie.getAtores(),
-                            serie.getPoster(),
-                            serie.getSinopse(),
-                            episodiosRecentes
-                    );
-                })
-                .collect(Collectors.toList());
-    }
-
 
     public SerieDTO obterPorId(Long id) {
         Optional<Serie> serie = repositorio.findById(id);
 
         if (serie.isPresent()) {
             Serie s = serie.get();
-            List<EpisodioDTO> episodiosRecentes = repositorio.obterEpisodiosMaisRecentesPorSerie(s.getId())
-                    .stream()
-                    .map(e -> new EpisodioDTO(
-                            e.getTemporada(),
-                            e.getNumeroEpisodio(),
-                            e.getTitulo()
-                    ))
-                    .collect(Collectors.toList());
-
-            return new SerieDTO(
-                    s.getId(),
-                    s.getTitulo(),
-                    s.getTotalTemporadas(),
-                    s.getAvaliacao(),
-                    s.getGenero(),
-                    s.getAtores(),
-                    s.getPoster(),
-                    s.getSinopse(),
-                    episodiosRecentes
-            );
+            return new SerieDTO(s.getId(), s.getTitulo(), s.getTotalTemporadas(), s.getAvaliacao(), s.getGenero(), s.getAtores(), s.getPoster(), s.getSinopse());
         }
         return null;
     }
 
 
-
-
     public List<EpisodioDTO> obterTodasTemporadas(Long id) {
         Optional<Serie> serie = repositorio.findById(id);
 
-        if (serie.isPresent()){
+        if (serie.isPresent()) {
             Serie s = serie.get();
-            return s.getEpisodios().stream().map(e-> new EpisodioDTO(e.getTemporada(),e.getNumeroEpisodio(),e.getTitulo()))
+            return s.getEpisodios().stream()
+                    .map(e -> new EpisodioDTO(e.getTemporada(), e.getNumeroEpisodio(), e.getTitulo()))
                     .collect(Collectors.toList());
         }
         return null;
@@ -167,29 +90,27 @@ public class SerieService {
     public List<SerieDTO> buscarSeriesPorNome(String nome) {
         // Busca as séries por nome
         Optional<Serie> series = repositorio.findByTituloContainingIgnoreCase(nome);
-
+    
         // Se não encontrar nenhuma série, busque na web e então busque novamente
         if (series.isEmpty()) {
             buscarSerieWeb(nome); // Busca e salva a série na web
             series = repositorio.findByTituloContainingIgnoreCase(nome);
         }
-
-        // Converte a lista de entidades Serie para uma lista de SerieDTO
+        
         return series.stream()
                 .map(s -> new SerieDTO(
                         s.getId(),
                         s.getTitulo(),
                         s.getTotalTemporadas(),
                         s.getAvaliacao(),
-                        s.getGenero(),
+                        s.getGenero(), // Certifique-se de que este é o tipo correto
                         s.getAtores(),
                         s.getPoster(),
-                        s.getSinopse(),
-                        // Inclua a lista de episódios se disponível ou use uma lista vazia
-                        Collections.emptyList() // Ajuste conforme necessário se você tiver episódios
+                        s.getSinopse()
                 ))
                 .collect(Collectors.toList());
     }
+    
 
     public void buscarSerieWeb(String nomeSerie) {
         var json = consumo.obterDados(API_URL + nomeSerie.replace(" ", "+") + API_KEY);
